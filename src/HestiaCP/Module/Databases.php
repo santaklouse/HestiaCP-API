@@ -10,6 +10,7 @@ use neto737\HestiaCP\Command\Delete\Database as DeleteDatabase;
 use neto737\HestiaCP\Command\Delete\Databases as DeleteDatabases;
 use neto737\HestiaCP\Command\Lists\Database as ListDatabase;
 use neto737\HestiaCP\Command\Lists\Databases as ListDatabases;
+use neto737\HestiaCP\Command\Change\DatabasePassword;
 
 class Databases extends Module {
 
@@ -81,5 +82,18 @@ class Databases extends Module {
      */
     public function listDatabases(): ArrayHash {
         return $this->client->send(new ListDatabases($this->user));
+    }
+
+    /**
+     * This function for changing database user password to a database. It uses the full name of database as argument.
+     * 
+     * @param string    $database
+     * @param string    $password
+     * @return bool
+     * @throws \neto737\HestiaCP\ClientException
+	 * @throws \neto737\HestiaCP\ProcessException
+     */
+    public function changePassword(string $database, string $password): bool {
+        return $this->client->send(new DatabasePassword($this->user, $database, $password));
     }
 }

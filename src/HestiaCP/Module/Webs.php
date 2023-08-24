@@ -9,19 +9,21 @@ use neto737\HestiaCP\Command\Add\WebDomain;
 use neto737\HestiaCP\Command\Add\WebDomainFtp;
 use neto737\HestiaCP\Command\Change\WebDomainFtpPassword;
 use neto737\HestiaCP\Command\Change\WebDomainFtpPath;
+use neto737\HestiaCP\Command\Change\WebDomainBackendTpl;
 use neto737\HestiaCP\Command\Suspend\WebDomain as SuspendWebDomain;
 use neto737\HestiaCP\Command\Unsuspend\WebDomain as UnsuspendWebDomain;
 use neto737\HestiaCP\Command\Delete\LetsEncryptDomain as DeleteLetsEncryptDomain;
 use neto737\HestiaCP\Command\Delete\WebDomain as DeleteWebDomain;
 use neto737\HestiaCP\Command\Delete\WebDomainFtp as DeleteWebDomainFtp;
 use neto737\HestiaCP\Command\Lists\WebDomains;
+use neto737\HestiaCP\Command\Lists\WebBackendTemplates;
 
 class Webs extends Module {
 
 	/** @var string */
 	private $user;
 
-	public function __construct(Client $client, string $user) {
+	public function __construct(Client $client, string $user = null) {
 		parent::__construct($client);
 		$this->user = $user;
 	}
@@ -172,5 +174,30 @@ class Webs extends Module {
 	 */
 	public function listDomains(): array {
 		return $this->client->send(new WebDomains($this->user));
+	}
+
+	/**
+	 * This function changes backend template for domain.
+	 * 
+	 * @param string $domain
+	 * @param string $template
+	 * @param bool   $restart
+	 * @return bool
+	 * @throws \neto737\HestiaCP\ClientException
+	 * @throws \neto737\HestiaCP\ProcessException
+	 */
+	public function changeDomainBackendTpl(string $domain, string $template, bool $restart = true): bool {
+		return $this->client->send(new WebDomainBackendTpl($this->user, $domain, $template, $restart));
+	}
+
+	/**
+	 * This function to obtain the list of all backend templates.
+	 * 
+	 * @return ArrayHash[]
+	 * @throws \neto737\HestiaCP\ClientException
+	 * @throws \neto737\HestiaCP\ProcessException
+	 */
+	public function listBackendTemplates(): array {
+		return $this->client->send(new WebBackendTemplates());
 	}
 }

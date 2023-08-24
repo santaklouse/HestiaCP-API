@@ -16,6 +16,12 @@ abstract class Command implements ICommand {
 	protected const ARG_4 = 'arg4';
 	protected const ARG_5 = 'arg5';
 	protected const ARG_6 = 'arg6';
+	protected const ARG_7 = 'arg7';
+	protected const ARG_8 = 'arg8';
+	protected const ARG_9 = 'arg9';
+	protected const ARG_10 = 'arg10';
+	protected const ARG_11 = 'arg11';
+	protected const ARG_12 = 'arg12';
 
 	protected const FORMAT_JSON = 'json';
 
