@@ -1,10 +1,5 @@
 
-# HestiaCP PHP API
-
-  
-[![Name](https://badgen.net/packagist/name/neto737/hestiacp-api)](//packagist.org/packages/neto737/hestiacp-api) [![Latest Stable Version](https://badgen.net/packagist/v/neto737/hestiacp-api/latest)](https://packagist.org/packages/neto737/hestiacp-api) [![Total Downloads](https://badgen.net/packagist/dt/neto737/hestiacp-api)](https://packagist.org/packages/neto737/hestiacp-api)  [![License](https://badgen.net/packagist/license/neto737/hestiacp-api)](https://packagist.org/packages/neto737/hestiacp-api) [![Build Status](https://www.travis-ci.com/neto737/HestiaCP-API.svg?branch=main)](https://www.travis-ci.com/github/neto737/HestiaCP-API) [![codecov](https://codecov.io/gh/neto737/HestiaCP-API/branch/main/graph/badge.svg?token=F93I5JQXY6)](https://codecov.io/gh/neto737/HestiaCP-API)
-
-  
+# HestiaCP PHP API 
 
 ## How to use
 
@@ -224,12 +219,4 @@ $backupModule->listBackup('admin.2021-10-13_18-12-53.tar'); // returns backup pa
 
 $backupModule->listBackupExclusions(); // returns the backup exclusions list
 
-```
-
-## Donate :heart:
-
-```
-BTC: bc1q89ntljt5lk7g9z68f5cjs83qfm2xme7g4hkur7
-ETH: 0xeef9220639F14E7A0FD825AAAd0574e5a8aD7A4B
-LTC: ltc1q508qfkd09vyya6c5zkfx4r248pf3ezj9ngjdr2
 ```
