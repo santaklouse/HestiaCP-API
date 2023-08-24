@@ -1,8 +1,8 @@
 <?php
 
-namespace neto737\HestiaCP\Command\Backup;
+namespace HestiaCP\Command\Backup;
 
-use neto737\HestiaCP\Command\ListCommand;
+use HestiaCP\Command\ListCommand;
 
 class Users extends ListCommand {
 

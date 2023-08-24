@@ -1,8 +1,8 @@
 <?php
 
-namespace neto737\HestiaCP\Command\Insert;
+namespace HestiaCP\Command\Insert;
 
-use neto737\HestiaCP\Command\ProcessCommand;
+use HestiaCP\Command\ProcessCommand;
 
 class DnsRecords extends ProcessCommand
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace neto737\HestiaCP\Module;
+namespace HestiaCP\Module;
 
-use neto737\HestiaCP\Client;
+use HestiaCP\Client;
 use Nette\Utils\ArrayHash;
 
-use neto737\HestiaCP\Command\Add\Database as AddDatabase;
-use neto737\HestiaCP\Command\Delete\Database as DeleteDatabase;
-use neto737\HestiaCP\Command\Delete\Databases as DeleteDatabases;
-use neto737\HestiaCP\Command\Lists\Database as ListDatabase;
-use neto737\HestiaCP\Command\Lists\Databases as ListDatabases;
-use neto737\HestiaCP\Command\Change\DatabasePassword;
+use HestiaCP\Command\Add\Database as AddDatabase;
+use HestiaCP\Command\Delete\Database as DeleteDatabase;
+use HestiaCP\Command\Delete\Databases as DeleteDatabases;
+use HestiaCP\Command\Lists\Database as ListDatabase;
+use HestiaCP\Command\Lists\Databases as ListDatabases;
+use HestiaCP\Command\Change\DatabasePassword;
 
 class Databases extends Module {
 
@@ -30,8 +30,8 @@ class Databases extends Module {
      * @param string    $dbpass
      * @param string    $type
      * @return bool
-     * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+     * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
      */
     public function add(string $database, string $dbuser, string $dbpass, string $type = 'mysql'): bool {
         return $this->client->send(new AddDatabase($this->user, $database, $dbuser, $dbpass, $type));
@@ -42,8 +42,8 @@ class Databases extends Module {
      * 
      * @param string    $database
      * @return bool
-     * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+     * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
      */
     public function delete(string $database): bool {
         return $this->client->send(new DeleteDatabase($this->user, $database));
@@ -53,8 +53,8 @@ class Databases extends Module {
      * This function deletes all user databases.
      * 
      * @return bool
-     * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+     * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
      */
     public function deleteDatabases(): bool {
         return $this->client->send(new DeleteDatabases($this->user));
@@ -65,8 +65,8 @@ class Databases extends Module {
      * 
      * @param string    $database
      * @return ArrayHash
-     * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+     * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
      */
     public function listDatabase(string $database): ArrayHash {
         return $this->client->send(new ListDatabase($this->user, $database));
@@ -77,8 +77,8 @@ class Databases extends Module {
      * 
      * @param string    $database
      * @return ArrayHash
-     * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+     * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
      */
     public function listDatabases(): ArrayHash {
         return $this->client->send(new ListDatabases($this->user));
@@ -90,8 +90,8 @@ class Databases extends Module {
      * @param string    $database
      * @param string    $password
      * @return bool
-     * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+     * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
      */
     public function changePassword(string $database, string $password): bool {
         return $this->client->send(new DatabasePassword($this->user, $database, $password));

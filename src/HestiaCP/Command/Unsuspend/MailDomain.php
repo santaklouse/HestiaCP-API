@@ -1,8 +1,8 @@
 <?php
 
-namespace neto737\HestiaCP\Command\Unsuspend;
+namespace HestiaCP\Command\Unsuspend;
 
-use neto737\HestiaCP\Command\ProcessCommand;
+use HestiaCP\Command\ProcessCommand;
 
 class MailDomain extends ProcessCommand {
 

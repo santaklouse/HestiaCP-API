@@ -1,9 +1,9 @@
 <?php
 
-namespace neto737\HestiaCP\Command\Lists;
+namespace HestiaCP\Command\Lists;
 
 use Nette\Utils\ArrayHash;
-use neto737\HestiaCP\Command\ListCommand;
+use HestiaCP\Command\ListCommand;
 
 class DnsMailDomainDkim extends ListCommand
 {

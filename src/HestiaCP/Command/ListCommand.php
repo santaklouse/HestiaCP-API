@@ -1,12 +1,12 @@
 <?php
 
-namespace neto737\HestiaCP\Command;
+namespace HestiaCP\Command;
 
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
-use neto737\HestiaCP\AuthorizationException;
-use neto737\HestiaCP\ProcessException;
+use HestiaCP\AuthorizationException;
+use HestiaCP\ProcessException;
 
 abstract class ListCommand extends Command {
 

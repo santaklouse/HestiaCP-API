@@ -1,8 +1,8 @@
 <?php
 
-namespace neto737\HestiaCP\Command\Lists;
+namespace HestiaCP\Command\Lists;
 
-use neto737\HestiaCP\Command\ListCommand;
+use HestiaCP\Command\ListCommand;
 
 class WebDomains extends ListCommand {
 

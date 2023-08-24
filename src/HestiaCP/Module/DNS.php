@@ -1,45 +1,45 @@
 <?php
 
-namespace neto737\HestiaCP\Module;
+namespace HestiaCP\Module;
 
 use Nette\Utils\ArrayHash;
-use neto737\HestiaCP\Command\Add\DnsRecord;
-use neto737\HestiaCP\Command\Add\DnsDomain;
-use neto737\HestiaCP\Command\Add\DnsOnWebAlias;
-use neto737\HestiaCP\Command\Add\DnsRemoteDomain;
-use neto737\HestiaCP\Command\Add\DnsRemoteHost;
-use neto737\HestiaCP\Command\Add\DnsRemoteRecord;
-use neto737\HestiaCP\Command\Change\DnsDomainTpl;
-use neto737\HestiaCP\Command\Change\DnsDomainDnssec;
-use neto737\HestiaCP\Command\Change\DnsDomainExp;
-use neto737\HestiaCP\Command\Change\DnsDomainIp;
-use neto737\HestiaCP\Command\Change\DnsDomainSoa;
-use neto737\HestiaCP\Command\Change\DnsDomainTtl;
-use neto737\HestiaCP\Command\Delete\DnsDomain as DnsDomainDelete;
-use neto737\HestiaCP\Command\Delete\DnsDomains as DnsDomainsDelete;
-use neto737\HestiaCP\Command\Delete\DnsDomainsSrc;
-use neto737\HestiaCP\Command\Delete\DnsOnWebAlias as DeleteDnsOnWebAlias;
-use neto737\HestiaCP\Command\Delete\DnsRecord as DeleteDnsRecord;
-use neto737\HestiaCP\Command\Get\DnsDomainValue;
-use neto737\HestiaCP\Command\Insert\DnsDomain as InsertDnsDomain;
-use neto737\HestiaCP\Command\Insert\DnsRecord as InsertDnsRecord;
-use neto737\HestiaCP\Command\Insert\DnsRecords as InsertDnsRecords;
-use neto737\HestiaCP\Command\Lists\DnsDomain as ListDnsDomain;
-use neto737\HestiaCP\Command\Lists\DnsDomains as ListDnsDomains;
-use neto737\HestiaCP\Command\Lists\DnsRecords as ListDnsRecords;
-use neto737\HestiaCP\Command\Lists\DnsTemplate as ListDnsTemplate;
-use neto737\HestiaCP\Command\Lists\DnsTemplates as ListDnsTemplates;
-use neto737\HestiaCP\Command\Lists\DnsPublicKey;
-use neto737\HestiaCP\Command\Lists\DnsMailDomainDkim;
-use neto737\HestiaCP\Command\Lists\DnsRemoteHosts;
-use neto737\HestiaCP\Command\Rebuild\DnsDomain as RebuildDnsDomain;
-use neto737\HestiaCP\Command\Rebuild\DnsDomains as RebuildDnsDomains;
-use neto737\HestiaCP\Command\Suspend\DnsDomain as SuspendDnsDomain;
-use neto737\HestiaCP\Command\Suspend\DnsDomains as SuspendDnsDomains;
-use neto737\HestiaCP\Command\Suspend\DnsRecord as SuspendDnsRecord;
-use neto737\HestiaCP\Command\Unsuspend\DnsDomain as UnsuspendDnsDomain;
-use neto737\HestiaCP\Command\Unsuspend\DnsDomains as UnsuspendDnsDomains;
-use neto737\HestiaCP\Command\Unsuspend\DnsRecord as UnsuspendDnsRecord;
+use HestiaCP\Command\Add\DnsRecord;
+use HestiaCP\Command\Add\DnsDomain;
+use HestiaCP\Command\Add\DnsOnWebAlias;
+use HestiaCP\Command\Add\DnsRemoteDomain;
+use HestiaCP\Command\Add\DnsRemoteHost;
+use HestiaCP\Command\Add\DnsRemoteRecord;
+use HestiaCP\Command\Change\DnsDomainTpl;
+use HestiaCP\Command\Change\DnsDomainDnssec;
+use HestiaCP\Command\Change\DnsDomainExp;
+use HestiaCP\Command\Change\DnsDomainIp;
+use HestiaCP\Command\Change\DnsDomainSoa;
+use HestiaCP\Command\Change\DnsDomainTtl;
+use HestiaCP\Command\Delete\DnsDomain as DnsDomainDelete;
+use HestiaCP\Command\Delete\DnsDomains as DnsDomainsDelete;
+use HestiaCP\Command\Delete\DnsDomainsSrc;
+use HestiaCP\Command\Delete\DnsOnWebAlias as DeleteDnsOnWebAlias;
+use HestiaCP\Command\Delete\DnsRecord as DeleteDnsRecord;
+use HestiaCP\Command\Get\DnsDomainValue;
+use HestiaCP\Command\Insert\DnsDomain as InsertDnsDomain;
+use HestiaCP\Command\Insert\DnsRecord as InsertDnsRecord;
+use HestiaCP\Command\Insert\DnsRecords as InsertDnsRecords;
+use HestiaCP\Command\Lists\DnsDomain as ListDnsDomain;
+use HestiaCP\Command\Lists\DnsDomains as ListDnsDomains;
+use HestiaCP\Command\Lists\DnsRecords as ListDnsRecords;
+use HestiaCP\Command\Lists\DnsTemplate as ListDnsTemplate;
+use HestiaCP\Command\Lists\DnsTemplates as ListDnsTemplates;
+use HestiaCP\Command\Lists\DnsPublicKey;
+use HestiaCP\Command\Lists\DnsMailDomainDkim;
+use HestiaCP\Command\Lists\DnsRemoteHosts;
+use HestiaCP\Command\Rebuild\DnsDomain as RebuildDnsDomain;
+use HestiaCP\Command\Rebuild\DnsDomains as RebuildDnsDomains;
+use HestiaCP\Command\Suspend\DnsDomain as SuspendDnsDomain;
+use HestiaCP\Command\Suspend\DnsDomains as SuspendDnsDomains;
+use HestiaCP\Command\Suspend\DnsRecord as SuspendDnsRecord;
+use HestiaCP\Command\Unsuspend\DnsDomain as UnsuspendDnsDomain;
+use HestiaCP\Command\Unsuspend\DnsDomains as UnsuspendDnsDomains;
+use HestiaCP\Command\Unsuspend\DnsRecord as UnsuspendDnsRecord;
 
 class DNS extends Module
 {
@@ -56,8 +56,8 @@ class DNS extends Module
 	 * @param bool        $restart
 	 * @param int|null    $ttl
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function addDNSRecord(string $user, string $domain, string $record, string $rtype, string $dvalue, int $priority = null, int $id = null, bool $restart = false, int $ttl = 7200): bool
 	{
@@ -80,8 +80,8 @@ class DNS extends Module
 	 * @param string      $ns8
 	 * @param bool        $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function addDNSDomain(string $user, string $domain, string $ip, string $ns1, string $ns2, string $ns3, string $ns4, string $ns5, string $ns6, string $ns7, string $ns8, bool $restart = false): bool
 	{
@@ -96,8 +96,8 @@ class DNS extends Module
 	 * @param string 	  $ip
 	 * @param bool        $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function addDNSOnWebAlias(string $user, string $alias, string $ip, bool $restart = false): bool
 	{
@@ -111,8 +111,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param bool        $flush
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function addDNSRemoteDomain(string $user, string $domain, bool $flush = false): bool
 	{
@@ -129,8 +129,8 @@ class DNS extends Module
 	 * @param string      $type
 	 * @param string      $dns_user
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function addDNSRemoteHost(string $host, int $port, string $api_key, string $password = null, string $type = 'api', string $dns_user): bool
 	{
@@ -144,8 +144,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param int         $id
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function addDNSRemoteRecord(string $user, string $domain, int $id): bool
 	{
@@ -160,8 +160,8 @@ class DNS extends Module
 	 * @param string 	  $template
 	 * @param bool        $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function changeDNSDomainTpl(string $user, string $domain, string $template, bool $restart = false): bool
 	{
@@ -175,8 +175,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param bool 	      $status
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function changeDNSDomainDnssec(string $user, string $domain, bool $status): bool
 	{
@@ -190,8 +190,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param string 	  $expiration
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function changeDNSDomainExp(string $user, string $domain, string $expiration): bool
 	{
@@ -206,8 +206,8 @@ class DNS extends Module
 	 * @param string 	  $ip
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function changeDNSDomainIp(string $user, string $domain, string $ip, bool $restart = false): bool
 	{
@@ -222,8 +222,8 @@ class DNS extends Module
 	 * @param string 	  $soa
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function changeDNSDomainSoa(string $user, string $domain, string $soa, bool $restart = false): bool
 	{
@@ -238,8 +238,8 @@ class DNS extends Module
 	 * @param int 	      $ttl
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function changeDNSDomainTtl(string $user, string $domain, int $ttl, bool $restart = false): bool
 	{
@@ -253,8 +253,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function deleteDNSDomain(string $user, string $domain, bool $restart = false): bool
 	{
@@ -267,8 +267,8 @@ class DNS extends Module
 	 * @param string 	  $user
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function deleteDNSDomains(string $user, bool $restart = false): bool
 	{
@@ -282,8 +282,8 @@ class DNS extends Module
 	 * @param string 	  $src
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function deleteDNSDomainsSrc(string $user, string $src, bool $restart = false): bool
 	{
@@ -298,8 +298,8 @@ class DNS extends Module
 	 * @param string 	  $alias
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function deleteDNSOnWebAlias(string $user, string $domain, string $alias, bool $restart = false): bool
 	{
@@ -314,8 +314,8 @@ class DNS extends Module
 	 * @param int 	      $id
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function deleteDNSRecord(string $user, string $domain, int $id, bool $restart = false): bool
 	{
@@ -329,8 +329,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param string 	  $key
 	 * @return string
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function getDNSDomainValue(string $user, string $domain, string $key): string
 	{
@@ -345,8 +345,8 @@ class DNS extends Module
 	 * @param string 	  $src
 	 * @param bool 	      $flush
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function insertDNSDomain(string $user, string $data, string $src, bool $flush = false): bool
 	{
@@ -360,8 +360,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param string 	  $data
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function insertDNSRecord(string $user, string $domain, string $data): bool
 	{
@@ -375,8 +375,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param string 	  $data_file
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function insertDNSRecords(string $user, string $domain, string $data_file): bool
 	{
@@ -389,8 +389,8 @@ class DNS extends Module
 	 * @param string 	  $user
 	 * @param string 	  $domain
 	 * @return ArrayHash[]
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function listDNSDomain(string $user, string $domain): ArrayHash
 	{
@@ -402,8 +402,8 @@ class DNS extends Module
 	 * 
 	 * @param string 	  $user
 	 * @return ArrayHash[]
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function listDNSDomains(string $user): ArrayHash
 	{
@@ -416,8 +416,8 @@ class DNS extends Module
 	 * @param string 	  $user
 	 * @param string 	  $domain
 	 * @return ArrayHash[]
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function listDNSRecords(string $user, string $domain): ArrayHash
 	{
@@ -429,8 +429,8 @@ class DNS extends Module
 	 * 
 	 * @param string 	  $template
 	 * @return ArrayHash[]
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function listDNSTemplate(string $template): ArrayHash
 	{
@@ -441,8 +441,8 @@ class DNS extends Module
 	 * This function for obtaining the list of all DNS templates available.
 	 * 
 	 * @return ArrayHash[]
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function listDNSTemplates(): ArrayHash
 	{
@@ -456,8 +456,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param string 	  $dnstype
 	 * @return ArrayHash[]
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function listDNSPublicKey(string $user, string $domain, string $dnstype): ArrayHash
 	{
@@ -470,8 +470,8 @@ class DNS extends Module
 	 * @param string 	  $user
 	 * @param string 	  $domain
 	 * @return ArrayHash[]
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function listDNSMailDomainDkim(string $user, string $domain): ArrayHash
 	{
@@ -482,8 +482,8 @@ class DNS extends Module
 	 * This function for obtaining the list of remote dns host.
 	 * 
 	 * @return ArrayHash[]
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function listDNSRemoteHosts(): ArrayHash
 	{
@@ -498,8 +498,8 @@ class DNS extends Module
 	 * @param bool 	      $restart
 	 * @param bool 	      $update_serial
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function rebuildDNSDomain(string $user, string $domain, bool $restart = false, bool $update_serial): bool
 	{
@@ -513,8 +513,8 @@ class DNS extends Module
 	 * @param bool 	      $restart
 	 * @param bool 	      $update_serial
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function rebuildDNSDomains(string $user, bool $restart = false, bool $update_serial): bool
 	{
@@ -528,8 +528,8 @@ class DNS extends Module
 	 * @param string 	  $domain
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function suspendDNSDomain(string $user, string $domain, bool $restart = false): bool
 	{
@@ -542,8 +542,8 @@ class DNS extends Module
 	 * @param string 	  $user
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function suspendDNSDomains(string $user, bool $restart = false): bool
 	{
@@ -558,8 +558,8 @@ class DNS extends Module
 	 * @param int 	      $id
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function suspendDNSRecord(string $user, string $domain, int $id, bool $restart = true): bool
 	{
@@ -572,8 +572,8 @@ class DNS extends Module
 	 * @param string 	  $user
 	 * @param string 	  $domain
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function unsuspendDNSDomain(string $user, string $domain): bool
 	{
@@ -586,8 +586,8 @@ class DNS extends Module
 	 * @param string 	  $user
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function unsuspendDNSDomains(string $user, bool $restart = false): bool
 	{
@@ -602,8 +602,8 @@ class DNS extends Module
 	 * @param int 	      $id
 	 * @param bool 	      $restart
 	 * @return bool
-	 * @throws \neto737\HestiaCP\ClientException
-	 * @throws \neto737\HestiaCP\ProcessException
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
 	 */
 	public function unsuspendDNSRecord(string $user, string $domain, int $id, bool $restart = true): bool
 	{

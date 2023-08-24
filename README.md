@@ -1,18 +1,13 @@
 
 # HestiaCP PHP API
 
-  
-[![Name](https://badgen.net/packagist/name/neto737/hestiacp-api)](//packagist.org/packages/neto737/hestiacp-api) [![Latest Stable Version](https://badgen.net/packagist/v/neto737/hestiacp-api/latest)](https://packagist.org/packages/neto737/hestiacp-api) [![Total Downloads](https://badgen.net/packagist/dt/neto737/hestiacp-api)](https://packagist.org/packages/neto737/hestiacp-api)  [![License](https://badgen.net/packagist/license/neto737/hestiacp-api)](https://packagist.org/packages/neto737/hestiacp-api) [![Build Status](https://www.travis-ci.com/neto737/HestiaCP-API.svg?branch=main)](https://www.travis-ci.com/github/neto737/HestiaCP-API) [![codecov](https://codecov.io/gh/neto737/HestiaCP-API/branch/main/graph/badge.svg?token=F93I5JQXY6)](https://codecov.io/gh/neto737/HestiaCP-API)
-
-  
-
 ## How to use
 
 1) Installation
 
 ```sh
 
-$ composer require neto737/hestiacp-api
+$ composer require ponasromas/hestiacp-api
 
 ```
 
@@ -22,15 +17,12 @@ a) Easy way
 
 ```php
 
-use neto737\HestiaCP\Client;
+use HestiaCP\Client;
 
 // Easy way to create Client
 
 // Using API Key
 $client = Client::simpleFactory('https://someHost', 'API_Key');
-
-// Using username and password
-$client = Client::simpleFactory('https://someHost', 'someUser', 'somePass');
 
 ```
 
@@ -38,17 +30,14 @@ b) For some reasons (more hosts, etc) you may need create objects alone
 
 ```php
 
-use neto737\HestiaCP\Client;
-use neto737\HestiaCP\Authorization\Credentials;
-use neto737\HestiaCP\Authorization\Host;
+use HestiaCP\Client;
+use HestiaCP\Authorization\Credentials;
+use HestiaCP\Authorization\Host;
 
 // You can choose to use an API Key or username and password
 
 // API Key
 $credentials = new Credentials('API_Key');
-
-// Username and Password
-$credentials = new Credentials('someUser', 'somePassword');
 
 $host = new Host('https://someHost', $credentials);
 
@@ -65,7 +54,7 @@ $client->testAuthorization(); // bool
 
 ```
 
-You can simply send one of prepared commands (or you can write own command - must implements `\neto737\HestiaCP\Command\ICommand` )
+You can simply send one of prepared commands (or you can write own command - must implements `HestiaCP\Command\ICommand` )
 
 ```php
 
@@ -225,11 +214,6 @@ $backupModule->listBackup('admin.2021-10-13_18-12-53.tar'); // returns backup pa
 $backupModule->listBackupExclusions(); // returns the backup exclusions list
 
 ```
+g) DNS module
 
-## Donate :heart:
-
-```
-BTC: bc1q89ntljt5lk7g9z68f5cjs83qfm2xme7g4hkur7
-ETH: 0xeef9220639F14E7A0FD825AAAd0574e5a8aD7A4B
-LTC: ltc1q508qfkd09vyya6c5zkfx4r248pf3ezj9ngjdr2
-```
+Class self-documented.

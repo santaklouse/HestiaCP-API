@@ -1,6 +1,6 @@
 <?php
 
-namespace neto737\HestiaCP\Authorization;
+namespace HestiaCP\Authorization;
 
 class Credentials {
 

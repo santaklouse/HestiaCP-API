@@ -1,6 +1,6 @@
 <?php
 
-namespace neto737\HestiaCP\Command;
+namespace HestiaCP\Command;
 
 use GuzzleHttp\Exception\ClientException;
 use Psr\Http\Message\ResponseInterface;

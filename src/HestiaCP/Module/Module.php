@@ -1,8 +1,8 @@
 <?php
 
-namespace neto737\HestiaCP\Module;
+namespace HestiaCP\Module;
 
-use neto737\HestiaCP\Client;
+use HestiaCP\Client;
 
 abstract class Module implements IModule {
 

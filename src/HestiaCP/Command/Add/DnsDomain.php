@@ -1,8 +1,8 @@
 <?php
 
-namespace neto737\HestiaCP\Command\Add;
+namespace HestiaCP\Command\Add;
 
-use neto737\HestiaCP\Command\ProcessCommand;
+use HestiaCP\Command\ProcessCommand;
 
 class DnsDomain extends ProcessCommand
 {

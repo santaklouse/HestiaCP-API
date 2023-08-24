@@ -1,6 +1,6 @@
 <?php
 
-namespace neto737\HestiaCP\Command;
+namespace HestiaCP\Command;
 
 class ResponseCode {
 

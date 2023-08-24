@@ -1,8 +1,8 @@
 <?php
 
-namespace neto737\HestiaCP\Command\Delete;
+namespace HestiaCP\Command\Delete;
 
-use neto737\HestiaCP\Command\ProcessCommand;
+use HestiaCP\Command\ProcessCommand;
 
 class UserBackup extends ProcessCommand {
 
