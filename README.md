@@ -13,20 +13,7 @@ $ composer require ponasromas/hestiacp-api
 
 2) Create Client
 
-a) Easy way
-
-```php
-
-use HestiaCP\Client;
-
-// Easy way to create Client
-
-// Using API Key
-$client = Client::simpleFactory('https://someHost', 'API_Key');
-
-```
-
-b) For some reasons (more hosts, etc) you may need create objects alone
+Build credentials. API username and password is highly discouraged. Use API key.
 
 ```php
 
@@ -34,13 +21,10 @@ use HestiaCP\Client;
 use HestiaCP\Authorization\Credentials;
 use HestiaCP\Authorization\Host;
 
-// You can choose to use an API Key or username and password
-
-// API Key
+// You can choose to use an API Key or username and password (legacy)
 $credentials = new Credentials('API_Key');
-
-$host = new Host('https://someHost', $credentials);
-
+$port = 8083;
+$host = new Host('https://server', $credentials, $port);
 $client = new Client($host);
 
 ```
