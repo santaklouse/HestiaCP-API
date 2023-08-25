@@ -4,7 +4,7 @@
     "version": "v0.1-alpha",
     "require": {
         "php": "^8.0",
-        "guzzlehttp/guzzle": "^8.1",
+        "guzzlehttp/guzzle": "^7.0",
         "nette/utils": "^3.2"
     },
     "homepage": "https://github.com/ponasromas/HestiaCP-API",
