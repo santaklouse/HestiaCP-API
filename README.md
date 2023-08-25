@@ -7,7 +7,7 @@
 
 ```sh
 
-$ composer require ponasromas/hestiacp-api
+$ composer require ponasromas/hestiacp-api:dev-main
 
 ```
 
@@ -37,15 +37,13 @@ $client = new Client($host);
 $client->testAuthorization(); // bool
 
 ```
-
-You can simply send one of prepared commands (or you can write own command - must implements `HestiaCP\Command\ICommand` )
+You can simply send one of prepared commands (or you can write your own command, just be sure to implement `HestiaCP\Command\ICommand` )
 
 ```php
 
 $command = new SomeCommand();
 
 $response = $client->send($command);
-
 
 echo $response->getResponseText();
 
@@ -58,7 +56,6 @@ a) user module
 ```php
 
 $userModule = $client->getModuleUser();
-
 
 $userModule->list(); // returns all users with data
 
@@ -81,7 +78,6 @@ b) web module
 ```php
 
 $webModule = $client->getModuleWeb('admin'); // web module needs user
-
 
 $webModule->listDomains();
 
@@ -112,7 +108,6 @@ c) mail module
 ```php
 
 $mailModule = $client->getModuleMail('admin'); // mail module needs user
-
 
 $mailModule->listDomains(); // returns mail domains from selected user
 
@@ -147,7 +142,6 @@ d) db module
 ```php
 
 $dbModule = $client->getModuleDatabase('admin');
-
 
 $dbModule->add('database', 'dbuser', 'dbpass');
 
@@ -200,4 +194,8 @@ $backupModule->listBackupExclusions(); // returns the backup exclusions list
 ```
 g) DNS module
 
-Class self-documented.
+```php
+
+$dnsModule = $client->getModuleDNS();
+
+```
