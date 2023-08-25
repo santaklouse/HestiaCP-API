@@ -2,7 +2,7 @@
     "name": "ponasromas/hestiacp-api",
     "description": "HestiaCP API SDK in PHP",
     "require": {
-        "php": ">=8.1",
+        "php": "^8.0",
         "guzzlehttp/guzzle": "^8.1",
         "nette/utils": "^3.2"
     },
@@ -14,7 +14,7 @@
             "email": "rms200x@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "classmap": ["src/"]
     }
