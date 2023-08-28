@@ -501,7 +501,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function rebuildDNSDomain(string $user, string $domain, bool $restart = false, bool $update_serial): bool
+	public function rebuildDNSDomain(string $user, string $domain, bool $restart = false, bool $update_serial = true): bool
 	{
 		return $this->client->send(new RebuildDnsDomain($user, $domain, $restart, $update_serial));
 	}
@@ -516,7 +516,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function rebuildDNSDomains(string $user, bool $restart = false, bool $update_serial): bool
+	public function rebuildDNSDomains(string $user, bool $restart = false, bool $update_serial = true): bool
 	{
 		return $this->client->send(new RebuildDnsDomains($user, $restart, $update_serial));
 	}
