@@ -5,6 +5,7 @@ namespace HestiaCP\Module;
 use Nette\Utils\ArrayHash;
 use HestiaCP\Command\Add\User as AddUser;
 use HestiaCP\Command\Change\UserPassword;
+use HestiaCP\Command\Change\UserConfigValue;
 use HestiaCP\Command\Suspend\User as SuspendUser;
 use HestiaCP\Command\Unsuspend\User  as UnsuspendUser;
 use HestiaCP\Command\Delete\User as DeleteUser;
@@ -112,5 +113,19 @@ class Users extends Module {
 	 */
 	public function backup(): string {
 		return $this->client->send(new BackupUsers);
+	}
+
+	/**
+	 * Changes key/value for specified user.
+	 * 
+	 * @param string $user
+	 * @param string $key
+	 * @param mixed $value
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function changeConfigValue(string $user, string $key, mixed $value): bool {
+		return $this->client->send(new UserConfigValue($user, $key, $value));
 	}
 }
