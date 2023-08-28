@@ -42,7 +42,7 @@ class DnsDomain extends ProcessCommand
 	/** @var bool */
 	private $restart;
 
-	public function __construct(string $user, string $domain, string $ip, string $ns1, string $ns2, string $ns3, string $ns4, string $ns5, string $ns6, string $ns7, string $ns8, bool $restart = false)
+	public function __construct(string $user, string $domain, string $ip, string $ns1, string $ns2, string $ns3 = null, string $ns4 = null, string $ns5 = null, string $ns6 = null, string $ns7 = null, string $ns8 = null, bool $restart = false)
 	{
 		$this->user = $user;
 		$this->domain = $domain;
