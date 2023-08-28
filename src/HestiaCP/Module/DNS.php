@@ -83,7 +83,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDNSDomain(string $user, string $domain, string $ip, string $ns1, string $ns2, string $ns3 = false, string $ns4 = false, string $ns5 = false, string $ns6 = false, string $ns7 = false, string $ns8 = false, bool $restart = false): bool
+	public function addDNSDomain(string $user, string $domain, string $ip, string $ns1, string $ns2, string $ns3 = null, string $ns4 = null, string $ns5 = null, string $ns6 = null, string $ns7 = null, string $ns8 = null, bool $restart = false): bool
 	{
 		return $this->client->send(new DnsDomain($user, $domain, $ip, $ns1, $ns2, $ns3, $ns4, $ns5, $ns6, $ns7, $ns8, $restart));
 	}
