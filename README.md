@@ -13,7 +13,7 @@ $ composer require ponasromas/hestiacp-api:dev-main
 
 2) Create Client
 
-Build credentials. API username and password is highly discouraged. Use API key.
+Use API key, username and password is possible but highly discouraged as deemed unsafe and will be deprecated.
 
 ```php
 
@@ -22,7 +22,7 @@ use HestiaCP\Authorization\Credentials;
 use HestiaCP\Authorization\Host;
 
 // You can choose to use an API Key or username and password (legacy)
-$credentials = new Credentials('API_Key');
+$credentials = new Credentials('Key:Secret');
 $port = 8083;
 $host = new Host('https://server', $credentials, $port);
 $client = new Client($host);
@@ -31,12 +31,6 @@ $client = new Client($host);
 
 3) Usage
 
-```php
-
-// verify login
-$client->testAuthorization(); // bool
-
-```
 You can simply send one of prepared commands (or you can write your own command, just be sure to implement `HestiaCP\Command\ICommand` )
 
 ```php
@@ -49,9 +43,10 @@ echo $response->getResponseText();
 
 ```
 
-Or you can use prepared modules
+List of prepared modules:
 
-a) user module
+
+User
 
 ```php
 
@@ -73,7 +68,7 @@ $userModule->delete('other_user');
 
 ```
 
-b) web module
+Web
 
 ```php
 
@@ -103,7 +98,7 @@ $webModule->deleteDomain('domain.com');
 
 ```
 
-c) mail module
+Mail
 
 ```php
 
@@ -137,7 +132,7 @@ $mailModule->deleteDomain('domain.com');
 
 ```
 
-d) db module
+DB
 
 ```php
 
@@ -153,27 +148,9 @@ $dbModule->listDatabase('database');
 
 $dbModule->listDatabases();
 
-
-// todo
-
-// ... etc
-
 ```
 
-e) cron module
-
-```php
-
-$cronModule = $client->getModuleCron();
-
-
-// todo
-
-// ... etc
-
-```
-
-f) backup module
+Backups
 
 ```php
 
@@ -192,7 +169,8 @@ $backupModule->listBackup('admin.2021-10-13_18-12-53.tar'); // returns backup pa
 $backupModule->listBackupExclusions(); // returns the backup exclusions list
 
 ```
-g) DNS module
+
+DNS
 
 ```php
 

@@ -6,7 +6,6 @@ use HestiaCP\Authorization\Credentials;
 use HestiaCP\Authorization\Host;
 use HestiaCP\Command\Add\LetsEncryptDomain;
 use HestiaCP\Command\ICommand;
-use HestiaCP\Command\TestAuthorization;
 use HestiaCP\Module\Backups;
 use HestiaCP\Module\Databases;
 use HestiaCP\Module\Mails;
@@ -57,16 +56,6 @@ class Client {
 
 	public function getHost(): Host {
 		return $this->host;
-	}
-
-	/**
-	 * @return bool
-	 * @throws ClientException
-	 * @throws ProcessException
-	 */
-	public function testAuthorization(): bool {
-		$command = new TestAuthorization();
-		return $this->send($command);
 	}
 
 	/**
