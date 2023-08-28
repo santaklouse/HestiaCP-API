@@ -132,7 +132,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDNSRemoteHost(string $host, int $port, string $api_key, string $password = null, string $type = 'api', string $dns_user): bool
+	public function addDNSRemoteHost(string $host, int $port, string $api_key, string $password = null, string $type = 'api', string $dns_user = null): bool
 	{
 		return $this->client->send(new DnsRemoteHost($host, $port, $api_key, $password, $type, $dns_user));
 	}
@@ -440,11 +440,11 @@ class DNS extends Module
 	/**
 	 * This function for obtaining the list of all DNS templates available.
 	 * 
-	 * @return ArrayHash[]
+	 * @return array
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function listDNSTemplates(): ArrayHash
+	public function listDNSTemplates(): array
 	{
 		return $this->client->send(new ListDnsTemplates());
 	}
