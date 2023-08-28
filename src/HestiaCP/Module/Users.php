@@ -61,8 +61,8 @@ class Users extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function add(string $user, string $password, string $email, string $package = null): bool {
-		return $this->client->send(new AddUser($user, $password, $email, $package));
+	public function add(string $user, string $password, string $email, string $package = null, string $name = null): bool {
+		return $this->client->send(new AddUser($user, $password, $email, $package, $name));
 	}
 
 	/**
