@@ -11,7 +11,9 @@ use HestiaCP\Command\Unsuspend\User  as UnsuspendUser;
 use HestiaCP\Command\Delete\User as DeleteUser;
 use HestiaCP\Command\Lists\User;
 use HestiaCP\Command\Lists\Users as ListsUsers;
+use HestiaCP\Command\Lists\UserStats as ListUserStats;
 use HestiaCP\Command\Backup\Users as BackupUsers;
+use HestiaCP\Command\Update\UserStats as UpdateUserStats;
 
 class Users extends Module {
 
@@ -127,5 +129,29 @@ class Users extends Module {
 	 */
 	public function changeConfigValue(string $user, string $key, mixed $value): bool {
 		return $this->client->send(new UserConfigValue($user, $key, $value));
+	}
+
+	/**
+	 * This function for listing user statistics.
+	 * 
+	 * @param string $user
+	 * @return ArrayHash
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function listStats(string $user): ArrayHash {
+		return $this->client->send(new ListUserStats($user));
+	}
+
+	/**
+	 * Function logs user parameters into statistics database.
+	 * 
+	 * @param string $user
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function updateStats(string $user): bool {
+		return $this->client->send(new UpdateUserStats($user));
 	}
 }
