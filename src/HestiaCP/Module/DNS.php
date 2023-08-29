@@ -415,11 +415,11 @@ class DNS extends Module
 	 * 
 	 * @param string 	  $user
 	 * @param string 	  $domain
-	 * @return ArrayHash[]
+	 * @return array
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function listDNSRecords(string $user, string $domain): ArrayHash
+	public function listDNSRecords(string $user, string $domain): array
 	{
 		return $this->client->send(new ListDnsRecords($user, $domain));
 	}
