@@ -2,7 +2,6 @@
 
 namespace HestiaCP\Command\Lists;
 
-use Nette\Utils\ArrayHash;
 use HestiaCP\Command\ListCommand;
 
 class Databases extends ListCommand {
@@ -16,10 +15,6 @@ class Databases extends ListCommand {
 
 	public function getName(): string {
 		return 'v-list-databases';
-	}
-
-	public function process(): ArrayHash {
-		return $this->convertDetail(parent::process());
 	}
 
 	public function getRequestParams(): array {

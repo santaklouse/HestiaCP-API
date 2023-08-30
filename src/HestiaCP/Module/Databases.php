@@ -76,11 +76,11 @@ class Databases extends Module {
      * This function for obtaining the list of all user's databases.
      * 
      * @param string    $database
-     * @return ArrayHash
+     * @return array
      * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
      */
-    public function listDatabases(): ArrayHash {
+    public function listDatabases(): array {
         return $this->client->send(new ListDatabases($this->user));
     }
 
