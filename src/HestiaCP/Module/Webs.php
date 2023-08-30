@@ -17,6 +17,7 @@ use HestiaCP\Command\Delete\WebDomain as DeleteWebDomain;
 use HestiaCP\Command\Delete\WebDomainFtp as DeleteWebDomainFtp;
 use HestiaCP\Command\Lists\WebDomains;
 use HestiaCP\Command\Lists\WebBackendTemplates;
+use HestiaCP\Command\Lists\WebDomainSsl;
 
 class Webs extends Module {
 
@@ -199,5 +200,17 @@ class Webs extends Module {
 	 */
 	public function listBackendTemplates(): array {
 		return $this->client->send(new WebBackendTemplates());
+	}
+
+	/**
+	 * This function of obtaining domain ssl files.
+	 * 
+	 * @param string $domain
+	 * @return array
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function getDomainSSLinfo(string $domain): array {
+		return $this->client->send(new WebDomainSsl($this->user, $domain));
 	}
 }
