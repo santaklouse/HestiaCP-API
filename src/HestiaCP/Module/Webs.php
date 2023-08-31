@@ -12,6 +12,7 @@ use HestiaCP\Command\Add\WebDomainSslForce as AddWebDomainSslForce;
 use HestiaCP\Command\Change\WebDomainFtpPassword;
 use HestiaCP\Command\Change\WebDomainFtpPath;
 use HestiaCP\Command\Change\WebDomainBackendTpl;
+use HestiaCP\Command\Change\WebDomainProxyTpl;
 use HestiaCP\Command\Suspend\WebDomain as SuspendWebDomain;
 use HestiaCP\Command\Unsuspend\WebDomain as UnsuspendWebDomain;
 use HestiaCP\Command\Delete\LetsEncryptDomain as DeleteLetsEncryptDomain;
@@ -290,5 +291,19 @@ class Webs extends Module {
 	 */
 	public function purgeNginxCache(string $domain): bool {
 		return $this->client->send(new NginxCache($this->user, $domain));
+	}
+
+	/**
+	 * his function changes proxy template.
+	 * 
+	 * @param string $domain
+	 * @param string $template
+	 * @param bool   $restart
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function changeDomainProxyTpl(string $domain, string $template, bool $restart = true): bool {
+		return $this->client->send(new WebDomainProxyTpl($this->user, $domain, $template, $restart));
 	}
 }
