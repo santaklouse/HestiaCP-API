@@ -8,6 +8,7 @@ use HestiaCP\Command\Add\LetsEncryptDomain;
 use HestiaCP\Command\Add\WebDomain;
 use HestiaCP\Command\Add\WebDomainFtp;
 use HestiaCP\Command\Add\WebDomainSslHsts as AddWebDomainSslHsts;
+use HestiaCP\Command\Add\WebDomainSslForce as AddWebDomainSslForce;
 use HestiaCP\Command\Change\WebDomainFtpPassword;
 use HestiaCP\Command\Change\WebDomainFtpPath;
 use HestiaCP\Command\Change\WebDomainBackendTpl;
@@ -17,6 +18,7 @@ use HestiaCP\Command\Delete\LetsEncryptDomain as DeleteLetsEncryptDomain;
 use HestiaCP\Command\Delete\WebDomain as DeleteWebDomain;
 use HestiaCP\Command\Delete\WebDomainFtp as DeleteWebDomainFtp;
 use HestiaCP\Command\Delete\WebDomainSslHsts as DeleteWebDomainSslHsts;
+use HestiaCP\Command\Delete\WebDomainSslForce as DeleteWebDomainSslForce;
 use HestiaCP\Command\Lists\WebDomains;
 use HestiaCP\Command\Lists\WebDomain as ListWebDomain;
 use HestiaCP\Command\Lists\WebBackendTemplates;
@@ -251,5 +253,29 @@ class Webs extends Module {
 	 */
 	public function deleteWebDomainSslHsts(string $domain): bool {
 		return $this->client->send(new DeleteWebDomainSslHsts($this->user, $domain));
+	}
+
+	/**
+	 * This function forces SSL for the requested domain.
+	 * 
+	 * @param string $domain
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function addWebDomainSslForce(string $domain): bool {
+		return $this->client->send(new AddWebDomainSslForce($this->user, $domain));
+	}
+
+	/**
+	 * This function removes force SSL configurations.
+	 * 
+	 * @param string $domain
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function deleteWebDomainSslForce(string $domain): bool {
+		return $this->client->send(new DeleteWebDomainSslForce($this->user, $domain));
 	}
 }
