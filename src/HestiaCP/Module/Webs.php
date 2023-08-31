@@ -23,6 +23,7 @@ use HestiaCP\Command\Lists\WebDomains;
 use HestiaCP\Command\Lists\WebDomain as ListWebDomain;
 use HestiaCP\Command\Lists\WebBackendTemplates;
 use HestiaCP\Command\Lists\WebDomainSsl;
+use HestiaCP\Command\Purge\NginxCache;
 
 class Webs extends Module {
 
@@ -277,5 +278,17 @@ class Webs extends Module {
 	 */
 	public function deleteWebDomainSslForce(string $domain): bool {
 		return $this->client->send(new DeleteWebDomainSslForce($this->user, $domain));
+	}
+
+	/**
+	 * This function purges nginx cache.
+	 * 
+	 * @param string $domain
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function purgeNginxCache(string $domain): bool {
+		return $this->client->send(new NginxCache($this->user, $domain));
 	}
 }
