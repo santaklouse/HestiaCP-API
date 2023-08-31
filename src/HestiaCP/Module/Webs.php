@@ -298,12 +298,13 @@ class Webs extends Module {
 	 * 
 	 * @param string $domain
 	 * @param string $template
-	 * @param bool   $restart
+	 * @param string $extensions
+	 * @param bool $restart
 	 * @return bool
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDomainProxyTpl(string $domain, string $template, bool $restart = true): bool {
-		return $this->client->send(new WebDomainProxyTpl($this->user, $domain, $template, $restart));
+	public function changeDomainProxyTpl(string $domain, string $template, string $extensions, bool $restart = true): bool {
+		return $this->client->send(new WebDomainProxyTpl($this->user, $domain, $template, $extensions, $restart));
 	}
 }
