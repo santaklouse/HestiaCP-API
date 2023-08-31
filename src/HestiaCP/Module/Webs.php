@@ -16,6 +16,7 @@ use HestiaCP\Command\Delete\LetsEncryptDomain as DeleteLetsEncryptDomain;
 use HestiaCP\Command\Delete\WebDomain as DeleteWebDomain;
 use HestiaCP\Command\Delete\WebDomainFtp as DeleteWebDomainFtp;
 use HestiaCP\Command\Lists\WebDomains;
+use HestiaCP\Command\Lists\WebDomain as ListWebDomain;
 use HestiaCP\Command\Lists\WebBackendTemplates;
 use HestiaCP\Command\Lists\WebDomainSsl;
 
@@ -212,5 +213,17 @@ class Webs extends Module {
 	 */
 	public function getDomainSSLinfo(string $domain): array {
 		return $this->client->send(new WebDomainSsl($this->user, $domain));
+	}
+
+	/**
+	 * This function to obtain web domain parameters.
+	 * 
+	 * @param string $domain
+	 * @return array
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function listWebDomain(string $domain): array {
+		return $this->client->send(new ListWebDomain($this->user, $domain));
 	}
 }
