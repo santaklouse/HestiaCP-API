@@ -101,14 +101,14 @@ class Webs extends Module
 	 * 
 	 * @param string      $domain
 	 * @param string|null $aliases
-	 * @param bool        $restart
+	 * @param string|null $mail
 	 * @return bool
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDomainLetsEncrypt(string $domain, string $aliases = null, bool $restart = false): bool
+	public function addDomainLetsEncrypt(string $domain, string $aliases = null, string $mail = null): bool
 	{
-		return $this->client->send(new LetsEncryptDomain($this->user, $domain, $aliases, $restart));
+		return $this->client->send(new LetsEncryptDomain($this->user, $domain, $aliases, $mail));
 	}
 
 	/**

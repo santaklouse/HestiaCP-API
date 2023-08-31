@@ -15,14 +15,14 @@ class LetsEncryptDomain extends ProcessCommand {
 	/** @var string|null */
 	private $aliases;
 
-	/** @var bool */
-	private $restart;
+	/** @var string|null */
+	private $mail;
 
-	public function __construct(string $user, string $domain, string $aliases = null, bool $restart = false) {
+	public function __construct(string $user, string $domain, string $aliases = null, string $mail = null) {
 		$this->user = $user;
 		$this->domain = $domain;
 		$this->aliases = $aliases;
-		$this->restart = $restart;
+		$this->mail = $mail;
 	}
 
 	public function getName(): string {
@@ -34,7 +34,7 @@ class LetsEncryptDomain extends ProcessCommand {
 			self::ARG_1 => $this->user,
 			self::ARG_2 => $this->domain,
 			self::ARG_3 => $this->aliases ?: '',
-			self::ARG_4 => $this->convertBool($this->restart),
+			self::ARG_4 => $this->mail ?: '',
 		];
 	}
 }
