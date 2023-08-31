@@ -26,12 +26,14 @@ use HestiaCP\Command\Lists\WebBackendTemplates;
 use HestiaCP\Command\Lists\WebDomainSsl;
 use HestiaCP\Command\Purge\NginxCache;
 
-class Webs extends Module {
+class Webs extends Module
+{
 
 	/** @var string */
 	private $user;
 
-	public function __construct(Client $client, string $user = null) {
+	public function __construct(Client $client, string $user = null)
+	{
 		parent::__construct($client);
 		$this->user = $user;
 	}
@@ -48,7 +50,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDomain(string $domain, string $ip = null, string $aliases = null, string $proxyExtensions = null, bool $restart = false): bool {
+	public function addDomain(string $domain, string $ip = null, string $aliases = null, string $proxyExtensions = null, bool $restart = false): bool
+	{
 		return $this->client->send(new WebDomain($this->user, $domain, $ip, $aliases, $proxyExtensions, $restart));
 	}
 
@@ -61,7 +64,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function suspendDomain(string $domain, bool $restart = false): bool {
+	public function suspendDomain(string $domain, bool $restart = false): bool
+	{
 		return $this->client->send(new SuspendWebDomain($this->user, $domain, $restart));
 	}
 
@@ -74,7 +78,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function unsuspendDomain(string $domain, bool $restart = false): bool {
+	public function unsuspendDomain(string $domain, bool $restart = false): bool
+	{
 		return $this->client->send(new UnsuspendWebDomain($this->user, $domain, $restart));
 	}
 
@@ -86,7 +91,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteDomain(string $domain): bool {
+	public function deleteDomain(string $domain): bool
+	{
 		return $this->client->send(new DeleteWebDomain($this->user, $domain));
 	}
 
@@ -100,7 +106,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDomainLetsEncrypt(string $domain, string $aliases = null, bool $restart = false): bool {
+	public function addDomainLetsEncrypt(string $domain, string $aliases = null, bool $restart = false): bool
+	{
 		return $this->client->send(new LetsEncryptDomain($this->user, $domain, $aliases, $restart));
 	}
 
@@ -113,7 +120,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteDomainLetsEncrypt(string $domain, bool $restart = false): bool {
+	public function deleteDomainLetsEncrypt(string $domain, bool $restart = false): bool
+	{
 		return $this->client->send(new DeleteLetsEncryptDomain($this->user, $domain, $restart));
 	}
 
@@ -128,7 +136,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDomainFtp(string $domain, string $ftpUser, string $ftpPassword, string $ftpPath = null): bool {
+	public function addDomainFtp(string $domain, string $ftpUser, string $ftpPassword, string $ftpPath = null): bool
+	{
 		return $this->client->send(new WebDomainFtp($this->user, $domain, $ftpUser, $ftpPassword, $ftpPath));
 	}
 
@@ -142,7 +151,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDomainFtpPassword(string $domain, string $ftpUser, string $ftpPassword): bool {
+	public function changeDomainFtpPassword(string $domain, string $ftpUser, string $ftpPassword): bool
+	{
 		return $this->client->send(new WebDomainFtpPassword($this->user, $domain, $ftpUser, $ftpPassword));
 	}
 
@@ -156,7 +166,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDomainFtpPath(string $domain, string $ftpUser, string $ftpPath): bool {
+	public function changeDomainFtpPath(string $domain, string $ftpUser, string $ftpPath): bool
+	{
 		return $this->client->send(new WebDomainFtpPath($this->user, $domain, $ftpUser, $ftpPath));
 	}
 
@@ -169,7 +180,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteDomainFtp(string $domain, string $ftpUser): bool {
+	public function deleteDomainFtp(string $domain, string $ftpUser): bool
+	{
 		return $this->client->send(new DeleteWebDomainFtp($this->user, $domain, $ftpUser));
 	}
 
@@ -180,7 +192,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function listDomains(): array {
+	public function listDomains(): array
+	{
 		return $this->client->send(new WebDomains($this->user));
 	}
 
@@ -194,7 +207,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDomainBackendTpl(string $domain, string $template, bool $restart = true): bool {
+	public function changeDomainBackendTpl(string $domain, string $template, bool $restart = true): bool
+	{
 		return $this->client->send(new WebDomainBackendTpl($this->user, $domain, $template, $restart));
 	}
 
@@ -205,7 +219,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function listBackendTemplates(): array {
+	public function listBackendTemplates(): array
+	{
 		return $this->client->send(new WebBackendTemplates());
 	}
 
@@ -217,7 +232,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function getDomainSSLinfo(string $domain): array {
+	public function getDomainSSLinfo(string $domain): array
+	{
 		return $this->client->send(new WebDomainSsl($this->user, $domain));
 	}
 
@@ -229,7 +245,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function listWebDomain(string $domain): array {
+	public function listWebDomain(string $domain): array
+	{
 		return $this->client->send(new ListWebDomain($this->user, $domain));
 	}
 
@@ -241,7 +258,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addWebDomainSslHsts(string $domain): bool {
+	public function addWebDomainSslHsts(string $domain): bool
+	{
 		return $this->client->send(new AddWebDomainSslHsts($this->user, $domain));
 	}
 
@@ -253,7 +271,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteWebDomainSslHsts(string $domain): bool {
+	public function deleteWebDomainSslHsts(string $domain): bool
+	{
 		return $this->client->send(new DeleteWebDomainSslHsts($this->user, $domain));
 	}
 
@@ -265,7 +284,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addWebDomainSslForce(string $domain): bool {
+	public function addWebDomainSslForce(string $domain): bool
+	{
 		return $this->client->send(new AddWebDomainSslForce($this->user, $domain));
 	}
 
@@ -277,7 +297,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteWebDomainSslForce(string $domain): bool {
+	public function deleteWebDomainSslForce(string $domain): bool
+	{
 		return $this->client->send(new DeleteWebDomainSslForce($this->user, $domain));
 	}
 
@@ -289,7 +310,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function purgeNginxCache(string $domain): bool {
+	public function purgeNginxCache(string $domain): bool
+	{
 		return $this->client->send(new NginxCache($this->user, $domain));
 	}
 
@@ -304,7 +326,8 @@ class Webs extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDomainProxyTpl(string $domain, string $template, string $extensions, bool $restart = true): bool {
+	public function changeDomainProxyTpl(string $domain, string $template, string $extensions, bool $restart = true): bool
+	{
 		return $this->client->send(new WebDomainProxyTpl($this->user, $domain, $template, $extensions, $restart));
 	}
 }

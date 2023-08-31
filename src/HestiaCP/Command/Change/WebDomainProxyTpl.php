@@ -17,7 +17,7 @@ class WebDomainProxyTpl extends ProcessCommand
 	private $template;
 
 	/** @var string */
-	private $extensions = "jpg,jpeg,gif,png,ico,svg,css,zip,tgz,gz,rar,bz2,doc,xls,exe,pdf,ppt,txt,odt,ods,odp,odf,tar,wav,bmp,rtf,js,mp3,avi,mpeg,flv,html,htm";
+	private $extensions;
 
 	/** @var bool */
 	private $restart;
