@@ -12,6 +12,7 @@ use HestiaCP\Command\Delete\User as DeleteUser;
 use HestiaCP\Command\Lists\User;
 use HestiaCP\Command\Lists\Users as ListsUsers;
 use HestiaCP\Command\Lists\UserStats as ListUserStats;
+use HestiaCP\Command\Lists\UserPackage as ListUserPackage;
 use HestiaCP\Command\Backup\Users as BackupUsers;
 use HestiaCP\Command\Update\UserStats as UpdateUserStats;
 
@@ -153,5 +154,17 @@ class Users extends Module {
 	 */
 	public function updateStats(string $user): bool {
 		return $this->client->send(new UpdateUserStats($user));
+	}
+
+ 	/**
+	 * This function for getting the list of system ip parameters.
+	 * 
+	 * @param string $package
+	 * @return array
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function listUserPackage(string $package): array {
+		return $this->client->send(new ListUserPackage($package));
 	}
 }
