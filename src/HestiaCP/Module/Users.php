@@ -6,6 +6,7 @@ use Nette\Utils\ArrayHash;
 use HestiaCP\Command\Add\User as AddUser;
 use HestiaCP\Command\Change\UserPassword;
 use HestiaCP\Command\Change\UserConfigValue;
+use HestiaCP\Command\Change\UserName;
 use HestiaCP\Command\Suspend\User as SuspendUser;
 use HestiaCP\Command\Unsuspend\User  as UnsuspendUser;
 use HestiaCP\Command\Delete\User as DeleteUser;
@@ -166,5 +167,19 @@ class Users extends Module {
 	 */
 	public function listUserPackage(string $package): array {
 		return $this->client->send(new ListUserPackage($package));
+	}
+
+	/**
+	 * Changes key/value for specified user.
+	 * 
+	 * @param string $user
+	 * @param string $name
+	 * @param string $surname
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function changeUserName(string $user, string $name, string $surname = null): bool {
+		return $this->client->send(new UserName($user, $name, $surname));
 	}
 }
