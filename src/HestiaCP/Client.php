@@ -12,6 +12,7 @@ use HestiaCP\Module\Mails;
 use HestiaCP\Module\Users;
 use HestiaCP\Module\Webs;
 use HestiaCP\Module\DNS;
+use HestiaCP\Module\Access;
 
 class Client {
 
@@ -145,5 +146,9 @@ class Client {
 
 	public function getModuleDNS(): DNS {
 		return $this->loadModule(DNS::class);
+	}
+
+	public function getModuleAccess(): Access {
+		return $this->loadModule(Access::class);
 	}
 }
