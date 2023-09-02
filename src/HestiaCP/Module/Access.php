@@ -3,7 +3,7 @@
 namespace HestiaCP\Module;
 
 use Nette\Utils\ArrayHash;
-use HestiaCP\Command\Lists\User;
+use HestiaCP\Command\Lists\AccessKeys;
 
 
 class Access extends Module {
@@ -17,6 +17,6 @@ class Access extends Module {
 	 * @throws \HestiaCP\ProcessException
 	 */
 	public function listAllApiKeys(string $user): array {
-		return $this->client->send(new User($user));
+		return $this->client->send(new AccessKeys($user));
 	}
 }
