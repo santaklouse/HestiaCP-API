@@ -136,11 +136,11 @@ class Users extends Module {
 	 * This function for listing user statistics.
 	 * 
 	 * @param string $user
-	 * @return ArrayHash
+	 * @return array
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function listStats(string $user): ArrayHash {
+	public function listStats(string $user): array {
 		return $this->client->send(new ListUserStats($user));
 	}
 
