@@ -9,6 +9,7 @@ use HestiaCP\Command\Add\WebDomain;
 use HestiaCP\Command\Add\WebDomainFtp;
 use HestiaCP\Command\Add\WebDomainSslHsts as AddWebDomainSslHsts;
 use HestiaCP\Command\Add\WebDomainSslForce as AddWebDomainSslForce;
+use HestiaCP\Command\Add\FsDirectory;
 use HestiaCP\Command\Change\WebDomainFtpPassword;
 use HestiaCP\Command\Change\WebDomainFtpPath;
 use HestiaCP\Command\Change\WebDomainBackendTpl;
@@ -346,5 +347,18 @@ class Webs extends Module
 	public function changeDomainDocroot(string $user, string $domain, string $target_domain, string $directory): bool
 	{
 		return $this->client->send(new WebDomainDocroot($user, $domain, $target_domain, $directory));
+	}
+
+	/**
+	 * This function creates new directory on the file system.
+	 * 
+	 * @param string $path
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function addNewDir(string $path): bool
+	{
+		return $this->client->send(new FsDirectory($this->user, $path));
 	}
 }
