@@ -337,13 +337,13 @@ class Webs extends Module
 	 * Changes the document root for an existing web domain.
 	 * 
 	 * @param string $domain
-	 * @param string $target_domain
+	 * @param string|null $target_domain
 	 * @param string $directory
 	 * @return bool
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDomainDocroot(string $domain, string $target_domain, string $directory): bool
+	public function changeDomainDocroot(string $domain, string $target_domain = null, string $directory = 'default'): bool
 	{
 		return $this->client->send(new WebDomainDocroot($this->user, $domain, $target_domain, $directory));
 	}
