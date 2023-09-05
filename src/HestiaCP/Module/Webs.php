@@ -13,6 +13,7 @@ use HestiaCP\Command\Change\WebDomainFtpPassword;
 use HestiaCP\Command\Change\WebDomainFtpPath;
 use HestiaCP\Command\Change\WebDomainBackendTpl;
 use HestiaCP\Command\Change\WebDomainProxyTpl;
+use HestiaCP\Command\Change\WebDomainDocroot;
 use HestiaCP\Command\Suspend\WebDomain as SuspendWebDomain;
 use HestiaCP\Command\Unsuspend\WebDomain as UnsuspendWebDomain;
 use HestiaCP\Command\Delete\LetsEncryptDomain as DeleteLetsEncryptDomain;
@@ -316,7 +317,7 @@ class Webs extends Module
 	}
 
 	/**
-	 * his function changes proxy template.
+	 * This function changes proxy template.
 	 * 
 	 * @param string $domain
 	 * @param string $template
@@ -329,5 +330,21 @@ class Webs extends Module
 	public function changeDomainProxyTpl(string $domain, string $template, string $extensions, bool $restart = true): bool
 	{
 		return $this->client->send(new WebDomainProxyTpl($this->user, $domain, $template, $extensions, $restart));
+	}
+
+	/**
+	 * Changes the document root for an existing web domain.
+	 * 
+	 * @param string $user
+	 * @param string $domain
+	 * @param string $target_domain
+	 * @param string $directory
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function changeDomainDocroot(string $user, string $domain, string $target_domain, string $directory): bool
+	{
+		return $this->client->send(new WebDomainDocroot($user, $domain, $target_domain, $directory));
 	}
 }
