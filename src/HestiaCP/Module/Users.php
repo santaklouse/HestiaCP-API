@@ -12,6 +12,7 @@ use HestiaCP\Command\Unsuspend\User  as UnsuspendUser;
 use HestiaCP\Command\Delete\User as DeleteUser;
 use HestiaCP\Command\Lists\User;
 use HestiaCP\Command\Lists\Users as ListsUsers;
+use HestiaCP\Command\Lists\SysUsers as ListSysUsers;
 use HestiaCP\Command\Lists\UserStats as ListUserStats;
 use HestiaCP\Command\Lists\UserPackage as ListUserPackage;
 use HestiaCP\Command\Backup\Users as BackupUsers;
@@ -28,6 +29,17 @@ class Users extends Module {
 	 */
 	public function list(): array {
 		return $this->client->send(new ListsUsers);
+	}
+
+	/**
+	 * This function for obtaining the list of system users without detailed information.
+	 * 
+	 * @return array
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function listSysUsers(): array {
+		return $this->client->send(new ListSysUsers);
 	}
 
 	/**
