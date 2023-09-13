@@ -26,6 +26,8 @@ use HestiaCP\Command\Lists\WebDomains;
 use HestiaCP\Command\Lists\WebDomain as ListWebDomain;
 use HestiaCP\Command\Lists\WebBackendTemplates;
 use HestiaCP\Command\Lists\WebDomainSsl;
+use HestiaCP\Command\Lists\WebDomainAccessLog;
+use HestiaCP\Command\Lists\WebDomainErrorLog;
 use HestiaCP\Command\Purge\NginxCache;
 
 class Webs extends Module
@@ -359,5 +361,33 @@ class Webs extends Module
 	public function addNewDir(string $path): bool
 	{
 		return $this->client->send(new FsDirectory($this->user, $path));
+	}
+
+	/**
+	 * This function of obtaining raw access web domain logs.
+	 * 
+	 * @param string $domain
+	 * @param int $lines
+	 * @return array
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function getAccessLog(string $domain, int $lines = 50): bool
+	{
+		return $this->client->send(new WebDomainAccessLog($this->user, $domain, $lines));
+	}
+
+	/**
+	 * This function of obtaining raw error web domain logs.
+	 * 
+	 * @param string $domain
+	 * @param int $lines
+	 * @return array
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function getErrorLog(string $domain, int $lines = 50): bool
+	{
+		return $this->client->send(new WebDomainErrorLog($this->user, $domain, $lines));
 	}
 }

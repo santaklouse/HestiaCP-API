@@ -15,6 +15,7 @@ use HestiaCP\Command\Lists\Users as ListsUsers;
 use HestiaCP\Command\Lists\SysUsers as ListSysUsers;
 use HestiaCP\Command\Lists\UserStats as ListUserStats;
 use HestiaCP\Command\Lists\UserPackage as ListUserPackage;
+use HestiaCP\Command\Lists\UserPackages as ListUserPackages;
 use HestiaCP\Command\Backup\Users as BackupUsers;
 use HestiaCP\Command\Update\UserStats as UpdateUserStats;
 
@@ -193,5 +194,16 @@ class Users extends Module {
 	 */
 	public function changeUserName(string $user, string $name, string $surname = null): bool {
 		return $this->client->send(new UserName($user, $name, $surname));
+	}
+
+	/**
+	 * This function for obtaining the list of available hosting packages.
+	 * 
+	 * @return array
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function listUserPackages(): array {
+		return $this->client->send(new ListUserPackages);
 	}
 }
