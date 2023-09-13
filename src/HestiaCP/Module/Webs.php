@@ -372,7 +372,7 @@ class Webs extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function getAccessLog(string $domain, int $lines = 50): bool
+	public function getAccessLog(string $domain, int $lines = 50): array
 	{
 		return $this->client->send(new WebDomainAccessLog($this->user, $domain, $lines));
 	}
@@ -386,7 +386,7 @@ class Webs extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function getErrorLog(string $domain, int $lines = 50): bool
+	public function getErrorLog(string $domain, int $lines = 50): array
 	{
 		return $this->client->send(new WebDomainErrorLog($this->user, $domain, $lines));
 	}
