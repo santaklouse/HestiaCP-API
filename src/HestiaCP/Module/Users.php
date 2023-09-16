@@ -7,6 +7,7 @@ use HestiaCP\Command\Add\User as AddUser;
 use HestiaCP\Command\Change\UserPassword;
 use HestiaCP\Command\Change\UserConfigValue;
 use HestiaCP\Command\Change\UserName;
+use HestiaCP\Command\Change\UserPackage as ChangeUserPackage;
 use HestiaCP\Command\Suspend\User as SuspendUser;
 use HestiaCP\Command\Unsuspend\User  as UnsuspendUser;
 use HestiaCP\Command\Delete\User as DeleteUser;
@@ -205,5 +206,19 @@ class Users extends Module {
 	 */
 	public function listUserPackages(): array {
 		return $this->client->send(new ListUserPackages);
+	}
+
+	/**
+	 * This function changes user's hosting package.
+	 * 
+	 * @param string $user
+	 * @param string $package
+	 * @param bool $force
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function changeUserPackage(string $user, string $package, bool $force = false): bool {
+		return $this->client->send(new ChangeUserPackage($user, $package, $force));
 	}
 }

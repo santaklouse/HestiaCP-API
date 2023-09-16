@@ -12,7 +12,7 @@ class WebDomain extends ProcessCommand {
     /** @var string */
     private $domain;
 
-    /** @var string */
+    /** @var bool */
     private $restart;
 
     public function __construct(string $user, string $domain, bool $restart = false) {
