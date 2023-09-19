@@ -124,7 +124,7 @@ class Webs extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteDomainLetsEncrypt(string $domain, bool $restart = false): bool
+	public function deleteDomainLetsEncrypt(string $domain, bool $restart = true): bool
 	{
 		return $this->client->send(new DeleteLetsEncryptDomain($this->user, $domain, $restart));
 	}
