@@ -54,7 +54,7 @@ class Webs extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDomain(string $domain, string $ip = null, string $aliases = null, string $proxyExtensions = null, bool $restart = false): bool
+	public function addDomain(string $domain, string $ip = null, string $aliases = null, string $proxyExtensions = null, bool $restart = true): bool
 	{
 		return $this->client->send(new WebDomain($this->user, $domain, $ip, $aliases, $proxyExtensions, $restart));
 	}
@@ -68,7 +68,7 @@ class Webs extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function suspendDomain(string $domain, bool $restart = false): bool
+	public function suspendDomain(string $domain, bool $restart = true): bool
 	{
 		return $this->client->send(new SuspendWebDomain($this->user, $domain, $restart));
 	}
@@ -82,7 +82,7 @@ class Webs extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function unsuspendDomain(string $domain, bool $restart = false): bool
+	public function unsuspendDomain(string $domain, bool $restart = true): bool
 	{
 		return $this->client->send(new UnsuspendWebDomain($this->user, $domain, $restart));
 	}

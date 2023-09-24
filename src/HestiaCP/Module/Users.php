@@ -93,7 +93,7 @@ class Users extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function suspend(string $user, bool $restart = false): bool {
+	public function suspend(string $user, bool $restart = true): bool {
 		return $this->client->send(new SuspendUser($user, $restart));
 	}
 
@@ -106,7 +106,7 @@ class Users extends Module {
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function unsuspend(string $user, bool $restart = false): bool {
+	public function unsuspend(string $user, bool $restart = true): bool {
 		return $this->client->send(new UnsuspendUser($user, $restart));
 	}
 

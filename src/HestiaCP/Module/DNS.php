@@ -59,7 +59,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDNSRecord(string $user, string $domain, string $record, string $rtype, string $dvalue, int $priority = null, int $id = null, bool $restart = false, int $ttl = 7200): bool
+	public function addDNSRecord(string $user, string $domain, string $record, string $rtype, string $dvalue, int $priority = null, int $id = null, bool $restart = true, int $ttl = 7200): bool
 	{
 		return $this->client->send(new DnsRecord($user, $domain, $record, $rtype, $dvalue, $priority, $id, $restart, $ttl));
 	}
@@ -83,7 +83,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDNSDomain(string $user, string $domain, string $ip, string $ns1, string $ns2, string $ns3 = null, string $ns4 = null, string $ns5 = null, string $ns6 = null, string $ns7 = null, string $ns8 = null, bool $restart = false): bool
+	public function addDNSDomain(string $user, string $domain, string $ip, string $ns1, string $ns2, string $ns3 = null, string $ns4 = null, string $ns5 = null, string $ns6 = null, string $ns7 = null, string $ns8 = null, bool $restart = true): bool
 	{
 		return $this->client->send(new DnsDomain($user, $domain, $ip, $ns1, $ns2, $ns3, $ns4, $ns5, $ns6, $ns7, $ns8, $restart));
 	}
@@ -99,7 +99,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function addDNSOnWebAlias(string $user, string $alias, string $ip, bool $restart = false): bool
+	public function addDNSOnWebAlias(string $user, string $alias, string $ip, bool $restart = true): bool
 	{
 		return $this->client->send(new DnsOnWebAlias($user, $alias, $ip, $restart));
 	}
@@ -163,7 +163,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDNSDomainTpl(string $user, string $domain, string $template, bool $restart = false): bool
+	public function changeDNSDomainTpl(string $user, string $domain, string $template, bool $restart = true): bool
 	{
 		return $this->client->send(new DnsDomainTpl($user, $domain, $template, $restart));
 	}
@@ -209,7 +209,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDNSDomainIp(string $user, string $domain, string $ip, bool $restart = false): bool
+	public function changeDNSDomainIp(string $user, string $domain, string $ip, bool $restart = true): bool
 	{
 		return $this->client->send(new DnsDomainIp($user, $domain, $ip, $restart));
 	}
@@ -225,7 +225,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDNSDomainSoa(string $user, string $domain, string $soa, bool $restart = false): bool
+	public function changeDNSDomainSoa(string $user, string $domain, string $soa, bool $restart = true): bool
 	{
 		return $this->client->send(new DnsDomainSoa($user, $domain, $soa, $restart));
 	}
@@ -241,7 +241,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function changeDNSDomainTtl(string $user, string $domain, int $ttl, bool $restart = false): bool
+	public function changeDNSDomainTtl(string $user, string $domain, int $ttl, bool $restart = true): bool
 	{
 		return $this->client->send(new DnsDomainTtl($user, $domain, $ttl, $restart));
 	}
@@ -256,7 +256,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteDNSDomain(string $user, string $domain, bool $restart = false): bool
+	public function deleteDNSDomain(string $user, string $domain, bool $restart = true): bool
 	{
 		return $this->client->send(new DnsDomainDelete($user, $domain, $restart));
 	}
@@ -270,7 +270,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteDNSDomains(string $user, bool $restart = false): bool
+	public function deleteDNSDomains(string $user, bool $restart = true): bool
 	{
 		return $this->client->send(new DnsDomainsDelete($user, $restart));
 	}
@@ -285,7 +285,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteDNSDomainsSrc(string $user, string $src, bool $restart = false): bool
+	public function deleteDNSDomainsSrc(string $user, string $src, bool $restart = true): bool
 	{
 		return $this->client->send(new DnsDomainsSrc($user, $src, $restart));
 	}
@@ -301,7 +301,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteDNSOnWebAlias(string $user, string $domain, string $alias, bool $restart = false): bool
+	public function deleteDNSOnWebAlias(string $user, string $domain, string $alias, bool $restart = true): bool
 	{
 		return $this->client->send(new DeleteDnsOnWebAlias($user, $domain, $alias, $restart));
 	}
@@ -317,7 +317,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function deleteDNSRecord(string $user, string $domain, int $id, bool $restart = false): bool
+	public function deleteDNSRecord(string $user, string $domain, int $id, bool $restart = true): bool
 	{
 		return $this->client->send(new DeleteDnsRecord($user, $domain, $id, $restart));
 	}
@@ -501,7 +501,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function rebuildDNSDomain(string $user, string $domain, bool $restart = false, bool $update_serial = true): bool
+	public function rebuildDNSDomain(string $user, string $domain, bool $restart = true, bool $update_serial = true): bool
 	{
 		return $this->client->send(new RebuildDnsDomain($user, $domain, $restart, $update_serial));
 	}
@@ -516,7 +516,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function rebuildDNSDomains(string $user, bool $restart = false, bool $update_serial = true): bool
+	public function rebuildDNSDomains(string $user, bool $restart = true, bool $update_serial = true): bool
 	{
 		return $this->client->send(new RebuildDnsDomains($user, $restart, $update_serial));
 	}
@@ -531,7 +531,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function suspendDNSDomain(string $user, string $domain, bool $restart = false): bool
+	public function suspendDNSDomain(string $user, string $domain, bool $restart = true): bool
 	{
 		return $this->client->send(new SuspendDnsDomain($user, $domain, $restart));
 	}
@@ -545,7 +545,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function suspendDNSDomains(string $user, bool $restart = false): bool
+	public function suspendDNSDomains(string $user, bool $restart = true): bool
 	{
 		return $this->client->send(new SuspendDnsDomains($user, $restart));
 	}
@@ -589,7 +589,7 @@ class DNS extends Module
 	 * @throws \HestiaCP\ClientException
 	 * @throws \HestiaCP\ProcessException
 	 */
-	public function unsuspendDNSDomains(string $user, bool $restart = false): bool
+	public function unsuspendDNSDomains(string $user, bool $restart = true): bool
 	{
 		return $this->client->send(new UnsuspendDnsDomains($user, $restart));
 	}
