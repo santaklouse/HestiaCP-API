@@ -18,7 +18,7 @@ class DnsDomain extends ProcessCommand
     /** @var bool */
 	private $update_serial;
 
-	public function __construct(string $user, string $domain, bool $restart = false, bool $update_serial)
+	public function __construct(string $user, string $domain, bool $restart = true, bool $update_serial = true)
 	{
 		$this->user = $user;
 		$this->domain = $domain;
@@ -37,7 +37,7 @@ class DnsDomain extends ProcessCommand
 			self::ARG_1 => $this->user,
 			self::ARG_2 => $this->domain,
 			self::ARG_3 => $this->convertBool($this->restart),
-            self::ARG_4 => $this->update_serial
+            self::ARG_4 => $this->convertBool($this->update_serial)
 		];
 	}
 }
