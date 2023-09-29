@@ -60,10 +60,10 @@ class DnsRecord extends ProcessCommand
 			self::ARG_3 => $this->record,
 			self::ARG_4 => $this->rtype,
 			self::ARG_5 => $this->dvalue,
-			self::ARG_6 => $this->priority,
-			self::ARG_7 => $this->id,
+			self::ARG_6 => $this->priority === NULL ? '' : $this->priority,
+			self::ARG_7 => $this->id === NULL ? '' : $this->id,
 			self::ARG_8 => $this->convertBool($this->restart),
-			self::ARG_9 => $this->convertBool($this->restart)
+			self::ARG_9 => $this->ttl
 		];
 	}
 }
