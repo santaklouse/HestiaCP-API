@@ -15,6 +15,7 @@ use HestiaCP\Command\Change\DnsDomainExp;
 use HestiaCP\Command\Change\DnsDomainIp;
 use HestiaCP\Command\Change\DnsDomainSoa;
 use HestiaCP\Command\Change\DnsDomainTtl;
+use HestiaCP\Command\Change\DnsDomainRecord;
 use HestiaCP\Command\Delete\DnsDomain as DnsDomainDelete;
 use HestiaCP\Command\Delete\DnsDomains as DnsDomainsDelete;
 use HestiaCP\Command\Delete\DnsDomainsSrc;
@@ -610,4 +611,24 @@ class DNS extends Module
 		return $this->client->send(new UnsuspendDnsRecord($user, $domain, $id, $restart));
 	}
 
+	/**
+	 * This function for changing DNS record.
+	 * 
+	 * @param string 	  $user
+	 * @param string 	  $domain
+	 * @param int	      $id
+	 * @param string 	  $record
+	 * @param string      $rtype
+	 * @param string      $dvalue
+	 * @param int|null    $priority
+	 * @param bool        $restart
+	 * @param int	      $ttl
+	 * @return bool
+	 * @throws \HestiaCP\ClientException
+	 * @throws \HestiaCP\ProcessException
+	 */
+	public function editDNSRecord(string $user, string $domain, int $id, string $record, string $type, string $value, int $priority = null, bool $restart = true, int $ttl = 7200): bool
+	{
+		return $this->client->send(new DnsDomainRecord($user, $domain, $id, $record, $type, $value, $priority, $restart, $ttl));
+	}
 }
