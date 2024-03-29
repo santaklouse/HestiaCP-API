@@ -1,13 +1,15 @@
 {
-    "name": "ponasromas/hestiacp-api",
+    "name": "santaklouse/hestiacp-api",
     "description": "HestiaCP API SDK in PHP",
-    "version": "v0.1-alpha",
+    "version": "v0.1",
     "require": {
         "php": "^8.0",
         "guzzlehttp/guzzle": "^7.0",
-        "nette/utils": "^3.2"
+        "nette/utils": "^3.2",
+        "santaklouse/php-array-utils": "dev-main"
     },
-    "homepage": "https://github.com/ponasromas/HestiaCP-API",
+    "type": "library",
+    "homepage": "https://github.com/santaklouse/HestiaCP-API",
     "license": "MIT",
     "authors": [
         {

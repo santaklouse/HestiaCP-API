@@ -2,6 +2,8 @@
 
 namespace HestiaCP\Module;
 
+use HestiaCP\ClientException;
+use HestiaCP\ProcessException;
 use Nette\Utils\ArrayHash;
 use HestiaCP\Command\Add\User as AddUser;
 use HestiaCP\Command\Change\UserPassword;
@@ -24,10 +26,10 @@ class Users extends Module {
 
 	/**
 	 * This function to obtain the list of all system users.
-	 * 
+	 *
 	 * @return array
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function list(): array {
 		return $this->client->send(new ListsUsers);
@@ -35,10 +37,10 @@ class Users extends Module {
 
 	/**
 	 * This function for obtaining the list of system users without detailed information.
-	 * 
+	 *
 	 * @return array
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function listSysUsers(): array {
 		return $this->client->send(new ListSysUsers);
@@ -46,11 +48,11 @@ class Users extends Module {
 
 	/**
 	 * This function to obtain user parameters.
-	 * 
+	 *
 	 * @param string $user
 	 * @return ArrayHash
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function detail(string $user): ArrayHash {
 		return $this->client->send(new User($user));
@@ -58,12 +60,12 @@ class Users extends Module {
 
 	/**
 	 * This function changes user's password and updates RKEY value.
-	 * 
+	 *
 	 * @param string $user
 	 * @param string $password
 	 * @return bool
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function changePassword(string $user, string $password): bool {
 		return $this->client->send(new UserPassword($user, $password));
@@ -71,14 +73,14 @@ class Users extends Module {
 
 	/**
 	 * This function creates new user account.
-	 * 
+	 *
 	 * @param string 	  $user
 	 * @param string 	  $password
 	 * @param string 	  $email
 	 * @param string|null $package
 	 * @return bool
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function add(string $user, string $password, string $email, string $package = null, string $name = null): bool {
 		return $this->client->send(new AddUser($user, $password, $email, $package, $name));
@@ -86,12 +88,12 @@ class Users extends Module {
 
 	/**
 	 * This function suspends a certain user and all his objects.
-	 * 
+	 *
 	 * @param string $user
 	 * @param bool 	 $restart
 	 * @return bool
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function suspend(string $user, bool $restart = true): bool {
 		return $this->client->send(new SuspendUser($user, $restart));
@@ -99,12 +101,12 @@ class Users extends Module {
 
 	/**
 	 * This function unsuspends user and all his objects.
-	 * 
+	 *
 	 * @param string $user
 	 * @param bool $restart
 	 * @return bool
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function unsuspend(string $user, bool $restart = true): bool {
 		return $this->client->send(new UnsuspendUser($user, $restart));
@@ -112,11 +114,11 @@ class Users extends Module {
 
 	/**
 	 * This function deletes a certain user and all his resources such as domains, databases, cron jobs, etc.
-	 * 
+	 *
 	 * @param string $user
 	 * @return bool
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function delete(string $user): bool {
 		return $this->client->send(new DeleteUser($user));
@@ -124,10 +126,10 @@ class Users extends Module {
 
 	/**
 	 * This function backups all system users.
-	 * 
+	 *
 	 * @return string
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function backup(): string {
 		return $this->client->send(new BackupUsers);
@@ -135,13 +137,13 @@ class Users extends Module {
 
 	/**
 	 * Changes key/value for specified user.
-	 * 
+	 *
 	 * @param string $user
 	 * @param string $key
 	 * @param mixed $value
 	 * @return bool
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function changeConfigValue(string $user, string $key, mixed $value): bool {
 		return $this->client->send(new UserConfigValue($user, $key, $value));
@@ -149,11 +151,11 @@ class Users extends Module {
 
 	/**
 	 * This function for listing user statistics.
-	 * 
+	 *
 	 * @param string $user
 	 * @return array
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function listStats(string $user): array {
 		return $this->client->send(new ListUserStats($user));
@@ -161,11 +163,11 @@ class Users extends Module {
 
 	/**
 	 * Function logs user parameters into statistics database.
-	 * 
+	 *
 	 * @param string $user
 	 * @return bool
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function updateStats(string $user): bool {
 		return $this->client->send(new UpdateUserStats($user));
@@ -173,11 +175,11 @@ class Users extends Module {
 
  	/**
 	 * This function for getting the list of system ip parameters.
-	 * 
+	 *
 	 * @param string $package
 	 * @return array
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function listUserPackage(string $package): array {
 		return $this->client->send(new ListUserPackage($package));
@@ -185,13 +187,13 @@ class Users extends Module {
 
 	/**
 	 * Changes key/value for specified user.
-	 * 
+	 *
 	 * @param string $user
 	 * @param string $name
 	 * @param string $surname
 	 * @return bool
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function changeUserName(string $user, string $name, string $surname = null): bool {
 		return $this->client->send(new UserName($user, $name, $surname));
@@ -199,10 +201,10 @@ class Users extends Module {
 
 	/**
 	 * This function for obtaining the list of available hosting packages.
-	 * 
+	 *
 	 * @return array
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function listUserPackages(): array {
 		return $this->client->send(new ListUserPackages);
@@ -210,13 +212,13 @@ class Users extends Module {
 
 	/**
 	 * This function changes user's hosting package.
-	 * 
+	 *
 	 * @param string $user
 	 * @param string $package
 	 * @param bool $force
 	 * @return bool
-	 * @throws \HestiaCP\ClientException
-	 * @throws \HestiaCP\ProcessException
+	 * @throws ClientException
+	 * @throws ProcessException
 	 */
 	public function changeUserPackage(string $user, string $package, bool $force = false): bool {
 		return $this->client->send(new ChangeUserPackage($user, $package, $force));
