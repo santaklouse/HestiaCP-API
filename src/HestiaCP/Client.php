@@ -25,10 +25,10 @@ class Client
     private $host;
 
     /** @var \GuzzleHttp\Client */
-    private $guzzleClient;
+    private \GuzzleHttp\Client $guzzleClient;
 
     /** @var array */
-    private $modules = [];
+    private array $modules = [];
 
     /**
      * Client constructor.
@@ -119,90 +119,35 @@ class Client
         } catch (\Exception $e) {
             throw new ClientException('Bad Client configuration (' . $e->getMessage() . ')');
         }
-
         return $this;
     }
 
-    static array $modulesClassMap = [
-        'user' => Users::class,
-        'sys' => System::class,
-        'access' => Access::class,
-        'dns' => DNS::class,
-        'db' => Databases::class,
-        'backup' => Backups::class,
-        'web' => Webs::class,
-        'mail' => Mails::class
-    ];
-
     /**
+     * is triggered when invoking inaccessible methods in an object context.
+     *
+     * @param string $name
+     * @param array $params
+     * @return mixed
+     * @throws Exception
      * @throws \Exception
      */
-    public static function getModuleClassByName($moduleName): Module
+    public function __call(string $name, array $params)
     {
-        return
-            self::$modulesClassMap[$moduleName]
-            ?? throw new \Exception("Missing module '{$moduleName}'");
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function getModule($moduleName, $param = NULL): Users
-    {
-        $class = self::getModuleClassByName($moduleName);
-        return $this->loadModule($class, $param);
-    }
-
-    private function loadModule($moduleName, $param = null)
-    {
-        $key = $moduleName . ($param ?? NULL);
-        if (Arr::has($this->modules, $key))
-            return $this->modules[$moduleName];
-        if ($param !== NULL) {
-            Arr::set($this->modules, $key, new $moduleName($this, $param));
-        } else {
-            Arr::set($this->modules, $key, new $moduleName($this));
+        if (str_starts_with($name, 'getModule')) {
+            $moduleName = str_replace('getModule', '', $name);
+            return $this->loadModule(strtolower($moduleName), $params);
         }
-        return Arr::get($this->modules, $key);
+
+        throw new Exception("method $name does not exists");
     }
 
-    public function getModuleUser(): Users
+
+    /**
+     * @throws \Exception
+     */
+    private function loadModule($moduleName, $params = null): Module
     {
-        return $this->loadModule(Users::class);
+        return Module::factory(strtolower($moduleName), $this, Arr::wrap($params));
     }
 
-    public function getModuleMail(string $user): Mails
-    {
-        return $this->loadModule(Mails::class, $user);
-    }
-
-    public function getModuleWeb(string $user): Webs
-    {
-        return $this->loadModule(Webs::class, $user);
-    }
-
-    public function getModuleBackup(string $user): Backups
-    {
-        return $this->loadModule(Backups::class, $user);
-    }
-
-    public function getModuleDatabase(string $user): Databases
-    {
-        return $this->loadModule(Databases::class, $user);
-    }
-
-    public function getModuleDNS(): DNS
-    {
-        return $this->loadModule(DNS::class);
-    }
-
-    public function getModuleAccess(): Access
-    {
-        return $this->loadModule(Access::class);
-    }
-
-    public function getModuleSystem(): System
-    {
-        return $this->loadModule(System::class);
-    }
 }
