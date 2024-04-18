@@ -17,7 +17,6 @@
             "email": "rms200x@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "classmap": ["src/"]
     }

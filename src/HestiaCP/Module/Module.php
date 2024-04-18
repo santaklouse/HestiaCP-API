@@ -77,9 +77,11 @@ abstract class Module implements IModule {
         if (Arr::has(self::$instances, $key))
             return Arr::get(self::$instances, $key);
 
-        $module = new static($client, ...$arguments);
+        $class = new \ReflectionClass(get_called_class());
+        $instance = $class->newInstanceArgs([$client, ...$arguments]);
+//        $instance = new static($client, ...$arguments);
 
-        Arr::set(self::$instances, $key, $module);
-        return $module;
+        Arr::set(self::$instances, $key, $instance);
+        return $instance;
     }
 }
